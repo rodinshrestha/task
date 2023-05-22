@@ -1,31 +1,30 @@
-import React from "react";
-import CardComponent from "@/components/Card";
-import { getPost } from "@/http/getPost";
-import { GetServerSideProps } from "next";
+import { getTaskPagination } from "@/http/get-task-2-pagination";
 import { PostData } from "@/types/post.type";
+import { GetServerSideProps } from "next";
+import React from "react";
 import { Box } from "@chakra-ui/react";
-import Task1 from "@/modules/Task-1";
+import Task2 from "@/modules/Task-2";
 import BaseLayout from "@/layout/BaseLayout";
 
 type Props = {
   data: PostData;
 };
 
-const Home = ({ data }: Props) => {
+const Task2Pagination = ({ data }: Props) => {
   return (
     <BaseLayout>
       <Box padding={2}>
-        <Task1 data={data} />
+        <Task2 data={data} />
       </Box>
     </BaseLayout>
   );
 };
 
-export default Home;
+export default Task2Pagination;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const post = await getPost();
+    const post = await getTaskPagination(2);
 
     return {
       props: { data: post },
